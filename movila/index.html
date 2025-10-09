@@ -1,127 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MOVILA — Discover Trending Films & Viral Videos</title>
-  <meta name="description" content="MOVILA brings you trending movies and viral videos curated for U.S. audiences. Discover synopses, trailers and viral clips." />
-  <link rel="icon" href="assets/movila-logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOVILA — Trending Movies & Viral Videos</title>
+  <meta name="description" content="Experience the world of trending movies and viral videos — MOVILA brings you cinematic stories and viral moments from the U.S. and beyond." />
+  <link rel="icon" href="assets/movila-icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <meta property="og:title" content="MOVILA — Trending Movies & Viral Videos" />
+  <meta property="og:description" content="Discover what’s hot in entertainment. From viral hits to epic films — MOVILA has it all." />
+  <meta property="og:image" content="assets/movila-preview.jpg" />
 </head>
+
 <body>
-  <!-- NAV -->
+  <!-- Navbar -->
   <header class="navbar">
-    <div class="container nav-inner">
-      <a href="./"><img src="assets/movila-logo.svg" alt="MOVILA" class="logo"></a>
+    <div class="nav-container">
+      <img src="assets/movila-logo.svg" alt="MOVILA Logo" class="logo" />
       <nav>
         <a href="#movies">Movies</a>
-        <a href="#viral">Viral</a>
+        <a href="#videos">Viral</a>
         <a href="#about">About</a>
       </nav>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero container">
-    <div class="hero-visual card fade-in" aria-hidden="true">
-      <!-- placeholder hero image (replace assets/hero-bg.jpg if you upload) -->
-      <img src="https://images.unsplash.com/photo-1517604931442-61c5c6e9b6f3?auto=format&w=1600&q=70" alt="Hero" />
-    </div>
-    <div class="hero-text fade-in" style="animation-delay:.12s">
-      <h1>Discover Trending Films & Viral Videos</h1>
-      <p class="lead">Curated film synopses, official trailers and viral clips — all in one place for pop-culture lovers in the U.S.</p>
-      <a class="cta" href="#movies">Explore Now</a>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>🎬 Welcome to <span>MOVILA</span></h1>
+      <p>Where <strong>cinema</strong> meets <strong>virality</strong>. Explore trending films and videos shaping pop culture in the U.S.</p>
+      <a href="#movies" class="cta-btn">Start Exploring</a>
     </div>
   </section>
 
-  <main class="container">
-    <!-- Trending Movies (Magazine cards) -->
-    <section id="movies" class="section fade-in" style="animation-delay:.18s">
-      <h2>Trending Films</h2>
-      <div class="magazine">
-        <!-- left: poster -->
-        <div class="card">
-          <img src="assets/dune-poster.jpg" alt="Dune: Part Two Poster">
-        </div>
-
-        <!-- right: text -->
-        <div class="card body fade-in" style="animation-delay:.22s">
-          <div class="body">
-            <div class="kicker">Now Trending</div>
-            <div class="title">Dune: Part Two (2025)</div>
-            <div class="excerpt">Paul Atreides returns amid rising tensions across Arrakis. A cinematic continuation exploring destiny, war and the sands that shape them.</div>
-            <div class="actions">
-              <a class="btn-play" href="movies/dune-part-two.html">Watch Trailer</a>
-              <a class="btn-outline" href="movies/dune-part-two.html">Read Synopsis</a>
-            </div>
+  <!-- Trending Movies -->
+  <main>
+    <section id="movies" class="content-section">
+      <h2>🔥 Trending Movies</h2>
+      <div class="grid">
+        <article>
+          <img src="https://image.tmdb.org/t/p/w500/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg" alt="Dune Part Two" />
+          <div class="card-content">
+            <h3>Dune: Part Two</h3>
+            <p>Paul Atreides unites with Chani and the Fremen as war explodes across Arrakis.</p>
+            <a href="movies/dune-part-two.html" class="read-more">Read More →</a>
           </div>
-        </div>
+        </article>
+
+        <article>
+          <img src="https://image.tmdb.org/t/p/w500/pQYHouPsDw32FhBLyCjv2vtFghT.jpg" alt="Venom 3" />
+          <div class="card-content">
+            <h3>Venom: The Last Dance</h3>
+            <p>Eddie and Venom face their biggest challenge yet — their own extinction.</p>
+            <a href="movies/venom3.html" class="read-more">Read More →</a>
+          </div>
+        </article>
       </div>
     </section>
 
     <!-- Viral Videos -->
-    <section id="viral" class="section fade-in" style="animation-delay:.26s">
-      <h2>Viral Videos</h2>
+    <section id="videos" class="content-section">
+      <h2>📺 Viral Videos</h2>
       <div class="grid">
-        <article class="card fade-in" style="animation-delay:.28s">
-          <div class="video-preview">
-            <img src="https://img.youtube.com/vi/uKnSlplKslw/0.jpg" alt="Taylor Swift – The Fate of Ophelia">
-            <div class="play-overlay">
-              <a class="play-circle" href="videos/taylor-ophelia.html" aria-label="Play">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7L8 5z"/></svg>
-              </a>
-            </div>
-          </div>
-          <div class="body">
-            <div class="kicker">Music Video</div>
-            <div class="title">Taylor Swift — The Fate of Ophelia</div>
-            <div class="excerpt">A visual work blending storytelling and pop craft, currently trending across platforms.</div>
+        <article>
+          <img src="https://img.youtube.com/vi/uKnSlplKslw/0.jpg" alt="Taylor Swift" />
+          <div class="card-content">
+            <h3>Taylor Swift – The Fate of Ophelia</h3>
+            <p>The visual masterpiece trending across America and breaking streaming charts.</p>
+            <a href="videos/taylor-ophelia.html" class="read-more">Watch Now →</a>
           </div>
         </article>
 
-        <article class="card fade-in" style="animation-delay:.32s">
-          <div class="video-preview">
-            <img src="https://img.youtube.com/vi/qJ2tW6WMUDg/0.jpg" alt="Frankenstein Trailer">
-            <div class="play-overlay">
-              <a class="play-circle" href="videos/frankenstein.html" aria-label="Play">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7L8 5z"/></svg>
-              </a>
-            </div>
-          </div>
-          <div class="body">
-            <div class="kicker">Trailer</div>
-            <div class="title">Frankenstein — Official Trailer</div>
-            <div class="excerpt">Guillermo del Toro's new trailer is creating conversation for its striking visuals and tone.</div>
+        <article>
+          <img src="https://img.youtube.com/vi/qJ2tW6WMUDg/0.jpg" alt="Frankenstein Trailer" />
+          <div class="card-content">
+            <h3>Frankenstein (Official Trailer)</h3>
+            <p>Guillermo del Toro redefines horror with this breathtaking reimagining.</p>
+            <a href="videos/frankenstein.html" class="read-more">Watch Now →</a>
           </div>
         </article>
       </div>
     </section>
 
     <!-- About -->
-    <section id="about" class="section fade-in" style="animation-delay:.36s">
+    <section id="about" class="about-section">
       <h2>About MOVILA</h2>
-      <p style="color:var(--muted)">MOVILA curates the best of film and viral culture for U.S. audiences — synopses, official trailers, and viral moments in one tidy, stylish place.</p>
+      <p><strong>MOVILA</strong> is your portal to trending entertainment — curated for U.S. audiences, designed for global fans. We highlight movies, moments, and viral phenomena shaping modern culture.</p>
+      <p>Stay inspired. Stay entertained. Stay MOVILA 💫</p>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 MOVILA — by Besti 💛</p>
-    </div>
+  <footer>
+    <p>© 2025 MOVILA | Built with ❤️ by Besti | Hosted on GitHub Pages</p>
   </footer>
-
-  <!-- small script to start animations on load -->
-  <script>
-    document.addEventListener('DOMContentLoaded', ()=> {
-      document.querySelectorAll('.fade-in').forEach((el,i)=>{
-        const d = el.style.animationDelay || '0s';
-        el.style.opacity = '';
-      });
-    });
-  </script>
 </body>
 </html>
-
-
-
