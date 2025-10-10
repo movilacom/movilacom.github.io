@@ -1,83 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MOVILA — Trending Movies & Viral Videos</title>
-  <meta name="description" content="Discover trending movies, viral videos, and exclusive entertainment updates from the U.S. — MOVILA.">
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
-  <meta property="og:title" content="MOVILA — Trending Movies & Viral Videos">
-  <meta property="og:description" content="Catch up on the latest trending films and viral content loved by U.S. audiences.">
-  <meta property="og:image" content="assets/movila-preview.jpg">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MOVILA — Trending Films & Viral Videos</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
 </head>
 
 <body>
   <header class="navbar">
-    <div class="container">
-      <img src="assets/logo.svg" alt="MOVILA Logo" class="logo">
-      <nav>
-        <a href="#movies">Movies</a>
-        <a href="#videos">Viral Videos</a>
-        <a href="#about">About</a>
-      </nav>
+    <div class="logo">
+      <img src="assets/logo.svg" alt="MOVILA Logo" height="48" />
+      <h1>MOVILA</h1>
     </div>
+    <p class="tagline">Discover Trending Films & Viral Videos</p>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>🎬 Welcome to MOVILA</h1>
-      <p>Your daily dose of trending <strong>movies</strong> and <strong>viral videos</strong> from the U.S.</p>
-      <a href="#movies" class="cta-btn">Explore Now</a>
-    </div>
-  </section>
-
   <main>
-    <section id="movies" class="content-section">
-      <h2>🔥 Trending Movies</h2>
-      <div class="grid">
-        <article>
-          <img src="https://image.tmdb.org/t/p/w500/xOMo8BRK7PfcJv9JCnx7s5hj0PX.jpg" alt="Dune: Part Two">
+    <!-- Trending Movies -->
+    <section class="trending">
+      <h2>🎬 Trending Movies</h2>
+      <div class="card-container">
+        <div class="card">
+          <img src="https://image.tmdb.org/t/p/w500/8bcoRX3hQRHufLPSDREdvr3YMXx.jpg" alt="Dune: Part Two Poster">
           <h3>Dune: Part Two</h3>
-          <p>Paul Atreides unites with the Fremen to exact revenge and shape the destiny of Arrakis.</p>
-          <a href="movies/dune-part-two.html" class="read-more">Read More →</a>
-        </article>
-        <article>
-          <img src="https://image.tmdb.org/t/p/w500/venom3.jpg" alt="Venom: The Last Dance">
-          <h3>Venom: The Last Dance</h3>
-          <p>Eddie Brock and Venom face their final battle in a world that fears them both.</p>
-          <a href="movies/venom3.html" class="read-more">Read More →</a>
-        </article>
+          <p>Paul Atreides unites with the Fremen to avenge his family and save Arrakis.</p>
+        </div>
+        <div class="card">
+          <img src="https://image.tmdb.org/t/p/w500/6tPqXlW8R7iVQm6r6tKp4sF1HZz.jpg" alt="Joker: Folie à Deux">
+          <h3>Joker: Folie à Deux</h3>
+          <p>Arthur Fleck returns with Harley Quinn in a twisted musical of chaos and love.</p>
+        </div>
+        <div class="card">
+          <img src="https://image.tmdb.org/t/p/w500/f3hEMr4P1q3gVJX2n5WvUj6zV8l.jpg" alt="Deadpool & Wolverine">
+          <h3>Deadpool & Wolverine</h3>
+          <p>The chaotic duo team up for an unexpected adventure across the multiverse.</p>
+        </div>
       </div>
     </section>
 
-    <section id="videos" class="content-section">
+    <!-- Viral Videos -->
+    <section class="viral">
       <h2>📺 Viral Videos</h2>
-      <div class="grid">
-        <article>
-          <img src="https://img.youtube.com/vi/uKnSlplKslw/0.jpg" alt="Taylor Swift – The Fate of Ophelia">
-          <h3>Taylor Swift – The Fate of Ophelia</h3>
-          <p>The new music video breaking YouTube trending charts across the U.S.</p>
-          <a href="videos/taylor-ophelia.html" class="read-more">Watch Now →</a>
-        </article>
-        <article>
-          <img src="https://img.youtube.com/vi/qJ2tW6WMUDg/0.jpg" alt="Frankenstein Trailer">
-          <h3>Frankenstein (Official Trailer)</h3>
-          <p>Guillermo del Toro’s chilling reimagining is taking over social feeds worldwide.</p>
-          <a href="videos/frankenstein.html" class="read-more">Watch Now →</a>
-        </article>
+      <div class="video-container">
+        <iframe width="100%" height="315" src="https://www.youtube.com/embed/Tp_YZNqNBhw" title="Viral Clip" frameborder="0" allowfullscreen></iframe>
       </div>
-    </section>
-
-    <section id="about" class="about-section">
-      <h2>About MOVILA</h2>
-      <p>MOVILA brings together the hottest film synopses and viral video moments. Curated for U.S. audiences, built for entertainment lovers worldwide.</p>
-      <p>Follow the trends. Feel the vibe. Stay MOVILA.</p>
+      <p class="note">*Videos sourced from trending clips on YouTube US*</p>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 MOVILA | Powered by GitHub Pages | Designed by Besti AI 🤍</p>
+    <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
   </footer>
 </body>
 </html>
