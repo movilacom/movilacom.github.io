@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>MOVILA — Trending Films & Viral Videos</title>
-  <meta name="description" content="Discover the latest trending movies and viral videos from across the web. Stay updated with MOVILA — your daily entertainment hub." />
-  <meta name="keywords" content="MOVILA, movies, viral videos, trending, film news, entertainment" />
-  <meta property="og:title" content="MOVILA — Trending Films & Viral Videos" />
-  <meta property="og:description" content="Discover the latest trending movies and viral videos from across the web." />
-  <meta property="og:image" content="assets/preview.jpg" />
-  <meta property="og:type" content="website" />
-  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+  <meta name="description" content="MOVILA brings you trending movies and viral videos updated daily." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <meta property="og:image" content="assets/preview.jpg" />
 </head>
-
 <body>
-  <header class="navbar">
-    <div class="top-bar">
-      <div class="logo">
-        <img src="assets/logo.svg" alt="MOVILA Logo" height="44" />
+  <div class="header-wrap">
+    <div class="header">
+      <div class="left">
+        <nav class="nav-strip">
+          <a href="movies.html">Trending Films</a>
+          <a href="viral.html">Viral Videos</a>
+          <a href="about.html">About</a>
+        </nav>
+      </div>
+
+      <div class="center brand">
+        <!-- logo.svg must exist in /assets/logo.svg -->
+        <img src="assets/logo.svg" alt="MOVILA logo (svg)" />
         <h1>MOVILA</h1>
       </div>
-      <form class="search-bar" onsubmit="return false;">
-        <input type="text" id="searchInput" placeholder="Search movies or videos..." />
-        <button onclick="searchContent()">🔍</button>
-      </form>
+
+      <div class="right search-bar">
+        <input id="searchInput" type="search" placeholder="Search movies or videos..." />
+        <button onclick="searchContent()">Search</button>
+      </div>
     </div>
+
     <p class="tagline">Discover Trending Films & Viral Videos</p>
-    <nav>
-      <a href="index.html" class="active">Home</a>
-      <a href="movies.html">Trending Films</a>
-      <a href="viral.html">Viral Videos</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+  </div>
 
   <main class="content-grid">
+    <aside class="sidebar">
+      <h3>🔥 Viral Videos</h3>
+      <div id="viralContainer" class="mini-list">
+        <!-- loaded by main.js -->
+      </div>
+    </aside>
+
     <section class="main-highlight">
       <h2>🎬 Trending Movies</h2>
-      <div id="moviesContainer" class="grid"></div>
+      <div id="moviesContainer" class="grid-cards">
+        <!-- loaded by main.js -->
+      </div>
     </section>
 
     <aside class="sidebar">
-      <h3>🔥 Viral Videos</h3>
-      <div id="viralContainer"></div>
-    </aside>
-
-    <aside class="sidebar right">
       <h3>⭐ Popular Picks</h3>
-      <div id="popularContainer"></div>
+      <div id="popularContainer">
+        <!-- loaded by main.js -->
+      </div>
     </aside>
   </main>
 
   <footer>
-    <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
+    © 2025 MOVILA — by Besti 💛 | All Rights Reserved
   </footer>
 
   <script src="main.js"></script>
