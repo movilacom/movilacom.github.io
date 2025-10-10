@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trending Films — MOVILA</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">
+      <img src="assets/movila-logo.svg" alt="MOVILA Logo" height="48" />
+      <h1>MOVILA</h1>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="movies.html" class="active">Trending Films</a>
+      <a href="viral.html">Viral Videos</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="trending">
+      <h2>🔥 Trending Films</h2>
+      <div class="card-container" id="movieList"></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 MOVILA — All Rights Reserved</p>
+  </footer>
+
+  <script>
+    // Contoh film trending (sementara, bisa diganti API nanti)
+    const movies = [
+      {
+        title: "Dune: Part Two",
+        desc: "Paul Atreides unites with the Fremen to avenge his family and save Arrakis.",
+        img: "https://image.tmdb.org/t/p/w500/8bcoRX3hQRHufLPSDREdvr3YMXx.jpg"
+      },
+      {
+        title: "Joker: Folie à Deux",
+        desc: "Arthur Fleck returns with Harley Quinn in a twisted musical of chaos and love.",
+        img: "https://image.tmdb.org/t/p/w500/6tPqXlW8R7iVQm6r6tKp4sF1HZz.jpg"
+      },
+      {
+        title: "Deadpool & Wolverine",
+        desc: "The chaotic duo team up for an unexpected adventure across the multiverse.",
+        img: "https://image.tmdb.org/t/p/w500/f3hEMr4P1q3gVJX2n5WvUj6zV8l.jpg"
+      }
+    ];
+
+    const list = document.getElementById("movieList");
+    list.innerHTML = movies.map(m => `
+      <div class="card">
+        <img src="${m.img}" alt="${m.title}" />
+        <h3>${m.title}</h3>
+        <p>${m.desc}</p>
+      </div>
+    `).join('');
+  </script>
+</body>
+</html>
