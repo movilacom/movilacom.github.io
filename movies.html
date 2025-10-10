@@ -3,15 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trending Films — MOVILA</title>
+  <title>MOVILA — Trending Films</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+  <style>
+    .skeleton {
+      background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 10px;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+  </style>
 </head>
+
 <body>
   <header class="navbar">
     <div class="logo">
-      <img src="assets/movila-logo.svg" alt="MOVILA Logo" height="48" />
+      <img src="assets/logo.svg" alt="MOVILA Logo" height="48" />
       <h1>MOVILA</h1>
     </div>
+    <p class="tagline">Discover Trending Films & Viral Videos</p>
     <nav>
       <a href="index.html">Home</a>
       <a href="movies.html" class="active">Trending Films</a>
@@ -21,43 +36,59 @@
 
   <main>
     <section class="trending">
-      <h2>🔥 Trending Films</h2>
-      <div class="card-container" id="movieList"></div>
+      <h2>🎬 Trending Movies</h2>
+      <div id="movie-container" class="card-container"></div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 MOVILA — All Rights Reserved</p>
+    <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
   </footer>
 
   <script>
-    // Contoh film trending (sementara, bisa diganti API nanti)
-    const movies = [
-      {
-        title: "Dune: Part Two",
-        desc: "Paul Atreides unites with the Fremen to avenge his family and save Arrakis.",
-        img: "https://image.tmdb.org/t/p/w500/8bcoRX3hQRHufLPSDREdvr3YMXx.jpg"
-      },
-      {
-        title: "Joker: Folie à Deux",
-        desc: "Arthur Fleck returns with Harley Quinn in a twisted musical of chaos and love.",
-        img: "https://image.tmdb.org/t/p/w500/6tPqXlW8R7iVQm6r6tKp4sF1HZz.jpg"
-      },
-      {
-        title: "Deadpool & Wolverine",
-        desc: "The chaotic duo team up for an unexpected adventure across the multiverse.",
-        img: "https://image.tmdb.org/t/p/w500/f3hEMr4P1q3gVJX2n5WvUj6zV8l.jpg"
-      }
-    ];
+    const API_KEY = "e2e0e3b90f9709c4bc6201c266a5dfb6";
+    const API_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=en-US`;
 
-    const list = document.getElementById("movieList");
-    list.innerHTML = movies.map(m => `
-      <div class="card">
-        <img src="${m.img}" alt="${m.title}" />
-        <h3>${m.title}</h3>
-        <p>${m.desc}</p>
-      </div>
-    `).join('');
+    const container = document.getElementById("movie-container");
+
+    function showSkeleton(count = 6) {
+      container.innerHTML = "";
+      for (let i = 0; i < count; i++) {
+        const skeleton = document.createElement("div");
+        skeleton.className = "card";
+        skeleton.innerHTML = `
+          <div class="skeleton" style="width:100%;height:380px;"></div>
+          <div class="skeleton" style="width:80%;height:20px;margin:10px auto;"></div>
+          <div class="skeleton" style="width:60%;height:14px;margin:5px auto;"></div>
+        `;
+        container.appendChild(skeleton);
+      }
+    }
+
+    async function loadMovies() {
+      showSkeleton();
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        container.innerHTML = "";
+
+        data.results.slice(0, 9).forEach(movie => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" />
+            <h3>${movie.title}</h3>
+            <p>${movie.overview ? movie.overview.slice(0, 100) + '…' : 'No description available.'}</p>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        container.innerHTML = `<p style="color:red;">Failed to load movies 😭</p>`;
+        console.error("Error fetching movies:", err);
+      }
+    }
+
+    loadMovies();
   </script>
 </body>
 </html>
