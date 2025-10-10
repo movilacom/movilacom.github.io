@@ -3,65 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<!-- SEO Meta -->
-<meta name="description" content="Explore trending films this week on MOVILA — updated automatically using TMDB data.">
-<meta name="keywords" content="trending movies, film trailers, TMDB, MOVILA, US movies, cinema, box office">
-<meta name="author" content="MOVILA Team">
-
-<!-- Open Graph -->
-<meta property="og:title" content="Trending Movies — MOVILA">
-<meta property="og:description" content="Explore the most popular films of the week.">
-<meta property="og:image" content="https://movilacom.pages.dev/assets/movie-preview.jpg">
-<meta property="og:url" content="https://movilacom.pages.dev/movies.html">
-<meta property="og:type" content="article">
-
-<!-- Schema Markup -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "CollectionPage",
-  "name": "Trending Movies",
-  "description": "A curated list of trending films updated daily from TMDB API.",
-  "url": "https://movilacom.pages.dev/movies.html"
-}
-</script>
-
-  <title>MOVILA — Trending Films</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Trending Films — MOVILA</title>
+  <meta name="description" content="Explore the latest trending films and box-office hits with MOVILA. Updated daily with popular titles and trailers." />
+  <meta property="og:title" content="Trending Films — MOVILA" />
+  <meta property="og:image" content="assets/preview.jpg" />
   <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
-  <style>
-    .skeleton {
-      background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.5s infinite;
-      border-radius: 10px;
-    }
-    @keyframes shimmer {
-      0% { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
   <header class="navbar">
-    <div class="logo">
-      <img src="assets/logo.svg" alt="MOVILA Logo" height="48" />
-      <h1>MOVILA</h1>
+    <div class="top-bar">
+      <div class="logo">
+        <img src="assets/logo.svg" alt="MOVILA Logo" height="44" />
+        <h1>MOVILA</h1>
+      </div>
+      <form class="search-bar" onsubmit="return false;">
+        <input type="text" id="searchInput" placeholder="Search movies..." />
+        <button onclick="searchContent()">🔍</button>
+      </form>
     </div>
-    <p class="tagline">Discover Trending Films & Viral Videos</p>
     <nav>
       <a href="index.html">Home</a>
       <a href="movies.html" class="active">Trending Films</a>
       <a href="viral.html">Viral Videos</a>
+      <a href="about.html">About</a>
     </nav>
   </header>
 
-  <main>
-    <section class="trending">
-      <h2>🎬 Trending Movies</h2>
-      <div id="movie-container" class="card-container"></div>
+  <main class="content-grid single">
+    <section>
+      <h2>🎥 Trending Films This Week</h2>
+      <div id="moviesList" class="grid"></div>
     </section>
   </main>
 
@@ -69,50 +42,22 @@
     <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
   </footer>
 
+  <script src="main.js"></script>
   <script>
-    const API_KEY = "e2e0e3b90f9709c4bc6201c266a5dfb6";
-    const API_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${API_KEY}&language=en-US`;
-
-    const container = document.getElementById("movie-container");
-
-    function showSkeleton(count = 6) {
-      container.innerHTML = "";
-      for (let i = 0; i < count; i++) {
-        const skeleton = document.createElement("div");
-        skeleton.className = "card";
-        skeleton.innerHTML = `
-          <div class="skeleton" style="width:100%;height:380px;"></div>
-          <div class="skeleton" style="width:80%;height:20px;margin:10px auto;"></div>
-          <div class="skeleton" style="width:60%;height:14px;margin:5px auto;"></div>
-        `;
-        container.appendChild(skeleton);
-      }
+    async function loadMoviesPage() {
+      const res = await fetch("https://api.themoviedb.org/3/trending/movie/week?api_key=4ef52b4b8b4b84e6229dc61a01662a5c");
+      const data = await res.json();
+      const container = document.getElementById("moviesList");
+      container.innerHTML = data.results.map(
+        m => `
+        <div class="card">
+          <img src="https://image.tmdb.org/t/p/w500${m.poster_path}" alt="${m.title}">
+          <h3>${m.title}</h3>
+          <p>${m.overview ? m.overview.substring(0,100) + "..." : ""}</p>
+        </div>`
+      ).join("");
     }
-
-    async function loadMovies() {
-      showSkeleton();
-      try {
-        const res = await fetch(API_URL);
-        const data = await res.json();
-        container.innerHTML = "";
-
-        data.results.slice(0, 9).forEach(movie => {
-          const card = document.createElement("div");
-          card.className = "card";
-          card.innerHTML = `
-            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}" />
-            <h3>${movie.title}</h3>
-            <p>${movie.overview ? movie.overview.slice(0, 100) + '…' : 'No description available.'}</p>
-          `;
-          container.appendChild(card);
-        });
-      } catch (err) {
-        container.innerHTML = `<p style="color:red;">Failed to load movies 😭</p>`;
-        console.error("Error fetching movies:", err);
-      }
-    }
-
-    loadMovies();
+    loadMoviesPage();
   </script>
 </body>
 </html>
