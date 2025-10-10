@@ -1,6 +1,5 @@
 // main.js - MOVILA
-const TMDB_KEY = "e2e0e3b90f9709c4bc6201c266a5dfb6"; // <- put your TMDB v3 key
-
+const TMDB_KEY = "e2e0e3b90f9709c4bc6201c266a5dfb6";
 const TMDB_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${TMDB_KEY}&language=en-US`;
 
 // Helper: safe fetch with timeout
@@ -19,15 +18,13 @@ async function safeFetch(url, timeout = 8000) {
   }
 }
 
-/* ---------- MOVIES ---------- */
+// ---------- MOVIES ----------
 async function loadTrendingMovies(containerId = "moviesContainer") {
   const container = document.getElementById(containerId);
   if (!container) return;
-  // show skeleton
   container.innerHTML = Array.from({length:6}).map(_=> `<div class="card"><div class="skeleton" style="height:220px"></div><div class="meta"><div class="skeleton" style="height:16px;width:70%"></div><div style="height:8px"></div><div class="skeleton" style="height:12px;width:90%"></div></div></div>`).join("");
   const data = await safeFetch(TMDB_URL);
   if (!data || !data.results) {
-    // fallback dummy
     container.innerHTML = getDummyMovies().slice(0,6).map(m => renderCard(m)).join("");
     return;
   }
@@ -44,12 +41,13 @@ function renderCard(m){
       <div class="meta">
         <h4>${escapeHtml(m.title)}</h4>
         <p>${escapeHtml(truncate(m.overview || "No description available.", 110))}</p>
+        <button class="preview-btn" onclick="openPreview('<img src=&quot;${m.img}&quot; style=&quot;width:100%;border-radius:12px;&quot;><h3 style=&quot;color:var(--accent);margin:10px 0 4px&quot;>${escapeHtml(m.title)}</h3><p style=&quot;color:var(--muted)&quot;>${escapeHtml(m.overview)}</p>')">Preview</button>
       </div>
     </div>
   `;
 }
 
-/* ---------- VIRAL (Reddit NSFW videos) ---------- */
+// ---------- VIRAL (Reddit NSFW videos) ----------
 async function loadViral(containerId = "viralContainer") {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -84,6 +82,12 @@ async function loadViral(containerId = "viralContainer") {
 }
 
 function renderVideo(v){
+  // Jika ada videoUrl dari Reddit, embed video
+  let previewHtml = v.videoUrl
+    ? `<video src="${v.videoUrl}" controls autoplay style="width:100%;max-height:50vh;border-radius:12px"></video>`
+    : `<img src="${v.img}" style="width:100%;border-radius:12px;">`;
+  previewHtml += `<h3 style="color:var(--accent);margin:10px 0 4px">${escapeHtml(v.title)}</h3><p style="color:var(--muted)">${escapeHtml(v.source || "")}</p>`;
+
   return `
     <div class="video-card card">
       <img src="${v.img}" alt="${escapeHtml(v.title)}">
@@ -92,13 +96,14 @@ function renderVideo(v){
         <p style="color:var(--muted);font-size:0.85rem;margin-top:6px">${escapeHtml(v.source || "")}</p>
         <div style="margin-top:8px">
           <a href="${v.videoUrl || v.url || '#'}" target="_blank" style="color:var(--accent);text-decoration:none">Open →</a>
+          <button class="preview-btn" onclick="openPreview(\`${previewHtml}\`)">Preview</button>
         </div>
       </div>
     </div>
   `;
 }
 
-/* ---------- Popular picks (small demo) ---------- */
+// ---------- Popular picks (small demo) ----------
 function loadPopular(containerId = "popularContainer"){
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -114,7 +119,7 @@ function loadPopular(containerId = "popularContainer"){
   `).join("");
 }
 
-/* ---------- Utilities & dummy data ---------- */
+// ---------- Utilities & dummy data ----------
 function truncate(s,n){ if(!s) return ""; return s.length>n? s.slice(0,n).trim()+"...": s }
 function escapeHtml(s){ if(!s) return ""; return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;") }
 
@@ -138,17 +143,25 @@ function getDummyViral(){
   ];
 }
 
-/* ---------- Search ---------- */
+// ---------- Search ----------
 function searchContent(){
   const q = document.getElementById("searchInput")?.value?.trim();
   if(!q) { alert("Please type a keyword to search"); return; }
-  // Quick search: open Google limited to site (simple approach)
   window.open(`https://www.google.com/search?q=${encodeURIComponent(q + " site:movilacom.pages.dev")}`, "_blank");
 }
 
-/* ---------- Init ---------- */
+// ---------- Preview modal ----------
+function openPreview(contentHtml) {
+  document.getElementById('previewContent').innerHTML = contentHtml;
+  document.getElementById('previewModal').style.display = 'flex';
+}
+function closePreview() {
+  document.getElementById('previewModal').style.display = 'none';
+}
+
+// ---------- Init ----------
 document.addEventListener("DOMContentLoaded", ()=>{
-  loadTrendingMovies(); // homepage
-  loadViral();          // homepage
-  loadPopular();        // sidebar
+  if(document.getElementById("moviesContainer")) loadTrendingMovies();
+  if(document.getElementById("viralContainer")) loadViral();
+  if(document.getElementById("popularContainer")) loadPopular();
 });
