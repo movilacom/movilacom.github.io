@@ -1,75 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<!-- SEO Meta -->
-<meta name="description" content="Learn about MOVILA — your trusted source for trending movies and viral videos.">
-<meta name="keywords" content="about MOVILA, entertainment website, movie trends, viral media, Adstra publisher">
-<meta name="author" content="MOVILA Team">
-
-<!-- Open Graph -->
-<meta property="og:title" content="About MOVILA">
-<meta property="og:description" content="Your daily entertainment portal built with passion and technology.">
-<meta property="og:image" content="https://movilacom.pages.dev/assets/about-preview.jpg">
-<meta property="og:url" content="https://movilacom.pages.dev/about.html">
-<meta property="og:type" content="profile">
-
-<!-- Schema Markup -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "name": "About MOVILA",
-  "url": "https://movilacom.pages.dev/about.html",
-  "description": "MOVILA — your daily portal for trending films and viral videos."
-}
-</script>
-
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>About — MOVILA</title>
+  <meta name="description" content="About MOVILA - who we are and what we do." />
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
 </head>
-
 <body>
-  <header class="navbar">
-    <div class="logo">
-      <img src="assets/logo.svg" alt="MOVILA Logo" height="48" />
-      <h1>MOVILA</h1>
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="movies.html">Trending Films</a>
-      <a href="viral.html">Viral Videos</a>
-      <a href="about.html" class="active">About</a>
-    </nav>
-  </header>
+  <div class="header-wrap">
+    <div class="header">
+      <div class="left">
+        <nav class="nav-strip">
+          <a href="movies.html">Trending Films</a>
+          <a href="viral.html">Viral Videos</a>
+          <a href="about.html" class="active">About</a>
+        </nav>
+      </div>
 
-  <main class="about">
-    <h2>About MOVILA</h2>
-    <p>
-      <strong>MOVILA</strong> is your daily portal for discovering trending movies and viral content
-      from across the internet. We blend film culture and viral media in a single destination for entertainment lovers.
-    </p>
-    <p>
-      Updated automatically using trusted APIs such as <strong>TMDB</strong> and <strong>GNews</strong>,
-      our goal is to deliver only the most relevant and high-quality content for audiences worldwide.
-    </p>
+      <div class="center brand">
+        <img src="assets/logo.svg" alt="MOVILA logo (svg)" />
+        <h1>MOVILA</h1>
+      </div>
 
-    <div class="about-card">
-      <h3>💡 Our Mission</h3>
-      <p>To make entertainment discovery effortless — from the latest blockbuster trailers to the viral trends shaping pop culture.</p>
+      <div class="right search-bar">
+        <input id="searchInput" type="search" placeholder="Search site..." />
+        <button onclick="searchContent()">Search</button>
+      </div>
     </div>
+    <p class="tagline">Learn more about MOVILA</p>
+  </div>
 
-    <div class="about-card">
-      <h3>🧠 Developer</h3>
-      <p>Built by <strong>Besti & AI</strong> 💛 — a project powered by creativity and curiosity.</p>
-    </div>
+  <main style="max-width:900px;margin:24px auto;padding:0 20px;">
+    <h2 style="color:var(--accent)">About MOVILA</h2>
+    <p>MOVILA is a curated portal for trending films and viral videos. We aggregate the web's most compelling entertainment content and present it in a clean, mobile-first experience.</p>
+    <p>Powered by TMDB (movies) and GNews (viral trends). Built and designed by Besti.</p>
   </main>
 
-  <footer>
-    <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
-  </footer>
+  <footer>© 2025 MOVILA — by Besti 💛</footer>
+  <script src="main.js"></script>
 </body>
 </html>
