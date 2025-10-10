@@ -13,55 +13,66 @@
   <div class="header-wrap">
     <div class="header">
       <div class="left">
-        <nav class="nav-strip">
+        <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav-strip" id="navStrip">
           <a href="movies.html">Trending Films</a>
           <a href="viral.html">Viral Videos</a>
           <a href="about.html">About</a>
         </nav>
       </div>
-
       <div class="center brand">
-        <!-- logo.svg must exist in /assets/logo.svg -->
-        <img src="assets/logo.svg" alt="MOVILA logo (svg)" />
+        <img src="assets/logo.svg" alt="MOVILA logo" />
         <h1>MOVILA</h1>
       </div>
-
       <div class="right search-bar">
         <input id="searchInput" type="search" placeholder="Search movies or videos..." />
         <button onclick="searchContent()">Search</button>
       </div>
     </div>
-
     <p class="tagline">Discover Trending Films & Viral Videos</p>
   </div>
-
   <main class="content-grid">
     <aside class="sidebar">
       <h3>🔥 Viral Videos</h3>
-      <div id="viralContainer" class="mini-list">
-        <!-- loaded by main.js -->
-      </div>
+      <div id="viralContainer" class="mini-list"></div>
     </aside>
-
     <section class="main-highlight">
       <h2>🎬 Trending Movies</h2>
-      <div id="moviesContainer" class="grid-cards">
-        <!-- loaded by main.js -->
-      </div>
+      <div id="moviesContainer" class="grid-cards"></div>
     </section>
-
     <aside class="sidebar">
       <h3>⭐ Popular Picks</h3>
-      <div id="popularContainer">
-        <!-- loaded by main.js -->
-      </div>
+      <div id="popularContainer"></div>
     </aside>
   </main>
-
   <footer>
     © 2025 MOVILA — by Besti 💛 | All Rights Reserved
   </footer>
 
+  <!-- Modal Preview -->
+  <div id="previewModal" class="preview-modal" style="display:none;">
+    <div class="preview-content" id="previewContent"></div>
+    <button class="close-modal" onclick="closePreview()">✕</button>
+  </div>
+  <script>
+    function toggleMenu() {
+      document.getElementById('navStrip').classList.toggle('active');
+    }
+    document.addEventListener('click', function(e) {
+      var nav = document.getElementById('navStrip');
+      var hamburger = document.querySelector('.hamburger');
+      if (nav.classList.contains('active') && !nav.contains(e.target) && !hamburger.contains(e.target)) {
+        nav.classList.remove('active');
+      }
+    });
+    function closePreview() {
+      document.getElementById('previewModal').style.display = 'none';
+    }
+  </script>
   <script src="main.js"></script>
 </body>
 </html>
