@@ -1,21 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>404 — Page Not Found | MOVILA</title>
+  <meta name="description" content="404 Error — MOVILA. The page you are looking for does not exist🥲. Discover trending movies and viral videos instead!" />
+  <meta property="og:title" content="404 — Page Not Found | MOVILA" />
+  <meta property="og:description" content="404 Error — MOVILA. The page you are looking for does not exist🥲. Discover trending movies and viral videos instead!" />
+  <meta property="og:image" content="assets/preview.jpg" />
+  <meta property="og:url" content="https://movilacom.github.io/404.html" />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <style>
+    .notfound {
+      display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:60vh;
+      text-align:center;
+    }
+    .notfound img { width:120px; margin-bottom:24px; }
+    .notfound h1 { font-size:3rem; color:var(--accent); }
+    .notfound p { color:var(--muted); font-size:1.2rem; margin:18px 0 24px; }
+    .notfound a { color:var(--accent-2); font-weight:bold; text-decoration:none; font-size:1.1rem; }
+    @media (max-width:520px) {
+      .notfound h1 { font-size:2rem; }
+      .notfound img { width:72px; }
+    }
+  </style>
 </head>
-
-<body class="error-page">
-  <main>
+<body>
+  <div class="header-wrap">
+    <div class="center brand">
+      <img src="assets/logo.svg" alt="MOVILA logo" />
+      <h1>MOVILA</h1>
+    </div>
+    <p class="tagline">Discover Trending Movies & Viral Videos from the USA — Updated Daily</p>
+  </div>
+  <main class="notfound">
+    <img src="assets/icon.svg" alt="404" />
     <h1>404</h1>
-    <p>Oops! The page you’re looking for doesn’t exist 😢</p>
-    <a href="index.html" class="cta-btn">← Back to Home</a>
+    <p>Oops, the page you're looking for doesn't exist.<br>
+    Return to <a href="index.html">Home</a> or explore <a href="movies.html">Trending Films</a> & <a href="viral.html">Viral Videos</a></p>
   </main>
-
   <footer>
-    <p>© 2025 MOVILA — by Besti 💛</p>
+    © 2025 MOVILA — by Besti 💛 | All Rights Reserved
   </footer>
 </body>
 </html>
