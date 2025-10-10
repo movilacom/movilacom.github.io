@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>About — MOVILA</title>
-  <meta name="description" content="About MOVILA - who we are and what we do." />
+  <title>About MOVILA — The Movie & Viral Video Platform</title>
+  <meta name="description" content="Learn more about MOVILA, the platform for trending movies and viral videos in the USA. Discover, preview, and enjoy the finest entertainment daily." />
+  <meta name="keywords" content="about, MOVILA, platform, trending movies, viral videos, USA" />
+  <meta property="og:title" content="About MOVILA — The Movie & Viral Video Platform" />
+  <meta property="og:description" content="Learn more about MOVILA, the platform for trending movies and viral videos in the USA. Discover, preview, and enjoy the finest entertainment daily." />
+  <meta property="og:image" content="assets/preview.jpg" />
+  <meta property="og:url" content="https://movilacom.github.io/about.html" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
 </head>
@@ -12,33 +17,55 @@
   <div class="header-wrap">
     <div class="header">
       <div class="left">
-        <nav class="nav-strip">
+        <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-strip" id="navStrip">
+          <a href="index.html">Home</a>
           <a href="movies.html">Trending Films</a>
           <a href="viral.html">Viral Videos</a>
           <a href="about.html" class="active">About</a>
         </nav>
       </div>
-
       <div class="center brand">
-        <img src="assets/logo.svg" alt="MOVILA logo (svg)" />
+        <img src="assets/logo.svg" alt="MOVILA logo" />
         <h1>MOVILA</h1>
       </div>
-
       <div class="right search-bar">
-        <input id="searchInput" type="search" placeholder="Search site..." />
+        <input id="searchInput" type="search" placeholder="Search..." />
         <button onclick="searchContent()">Search</button>
       </div>
     </div>
-    <p class="tagline">Learn more about MOVILA</p>
+    <p class="tagline">Discover Trending Movies & Viral Videos from the USA — Updated Daily</p>
   </div>
-
-  <main style="max-width:900px;margin:24px auto;padding:0 20px;">
-    <h2 style="color:var(--accent)">About MOVILA</h2>
-    <p>MOVILA is a curated portal for trending films and viral videos. We aggregate the web's most compelling entertainment content and present it in a clean, mobile-first experience.</p>
-    <p>Powered by TMDB (movies) and GNews (viral trends). Built and designed by Besti.</p>
+  <main class="single-main">
+    <h2>About MOVILA</h2>
+    <p>MOVILA is a curated platform presenting the latest trending movies and viral videos in the USA. Updated daily, our elegant dark-gold theme delivers a cinematic, premium experience for movie lovers and video seekers.</p>
+    <p>Created & curated by <strong>Besti</strong> 💛</p>
+    <p>Contact: <a href="mailto:info@movila.com">info@movila.com</a></p>
   </main>
-
-  <footer>© 2025 MOVILA — by Besti 💛</footer>
+  <footer>
+    © 2025 MOVILA — by Besti 💛 | All Rights Reserved
+  </footer>
+  <div id="previewModal" class="preview-modal" style="display:none;">
+    <div class="preview-content" id="previewContent"></div>
+    <button class="close-modal" onclick="closePreview()">✕</button>
+  </div>
+  <script>
+    function toggleMenu() {
+      document.getElementById('navStrip').classList.toggle('active');
+    }
+    document.addEventListener('click', function(e) {
+      var nav = document.getElementById('navStrip');
+      var hamburger = document.querySelector('.hamburger');
+      if (nav.classList.contains('active') && !nav.contains(e.target) && !hamburger.contains(e.target)) {
+        nav.classList.remove('active');
+      }
+    });
+    function closePreview() {
+      document.getElementById('previewModal').style.display = 'none';
+    }
+  </script>
   <script src="main.js"></script>
 </body>
 </html>
