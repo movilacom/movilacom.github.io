@@ -3,8 +3,13 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Viral Videos — MOVILA</title>
-  <meta name="description" content="Curated viral videos & entertainment clips." />
+  <title>Viral Videos USA | MOVILA</title>
+  <meta name="description" content="Watch the most viral videos from the USA. MOVILA updates daily with the best entertainment and video previews." />
+  <meta name="keywords" content="viral videos, USA, MOVILA, entertainment, trending video" />
+  <meta property="og:title" content="Viral Videos USA | MOVILA" />
+  <meta property="og:description" content="Watch the most viral videos from the USA. MOVILA updates daily with the best entertainment and video previews." />
+  <meta property="og:image" content="assets/preview.jpg" />
+  <meta property="og:url" content="https://movilacom.github.io/viral.html" />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
 </head>
@@ -12,34 +17,53 @@
   <div class="header-wrap">
     <div class="header">
       <div class="left">
-        <nav class="nav-strip">
+        <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="nav-strip" id="navStrip">
+          <a href="index.html">Home</a>
           <a href="movies.html">Trending Films</a>
           <a href="viral.html" class="active">Viral Videos</a>
           <a href="about.html">About</a>
         </nav>
       </div>
-
       <div class="center brand">
-        <img src="assets/logo.svg" alt="MOVILA logo (svg)" />
+        <img src="assets/logo.svg" alt="MOVILA logo" />
         <h1>MOVILA</h1>
       </div>
-
       <div class="right search-bar">
-        <input id="searchInput" type="search" placeholder="Search viral videos..." />
+        <input id="searchInput" type="search" placeholder="Search videos..." />
         <button onclick="searchContent()">Search</button>
       </div>
     </div>
-    <p class="tagline">Top viral videos and entertainment buzz</p>
+    <p class="tagline">Discover Trending Movies & Viral Videos from the USA — Updated Daily</p>
   </div>
-
-  <main style="max-width:1200px;margin:22px auto;padding:0 20px;">
-    <h2 style="color:var(--accent)">Viral Videos</h2>
-    <div id="viralContainer" class="grid-cards" style="margin-top:12px">
-      <!-- loaded by main.js -->
-    </div>
+  <main class="single-main">
+    <h2>🔥 Viral Videos This Week</h2>
+    <div id="viralContainer" class="grid-cards"></div>
   </main>
-
-  <footer>© 2025 MOVILA — by Besti 💛</footer>
+  <footer>
+    © 2025 MOVILA — by Besti 💛 | All Rights Reserved
+  </footer>
+  <div id="previewModal" class="preview-modal" style="display:none;">
+    <div class="preview-content" id="previewContent"></div>
+    <button class="close-modal" onclick="closePreview()">✕</button>
+  </div>
+  <script>
+    function toggleMenu() {
+      document.getElementById('navStrip').classList.toggle('active');
+    }
+    document.addEventListener('click', function(e) {
+      var nav = document.getElementById('navStrip');
+      var hamburger = document.querySelector('.hamburger');
+      if (nav.classList.contains('active') && !nav.contains(e.target) && !hamburger.contains(e.target)) {
+        nav.classList.remove('active');
+      }
+    });
+    function closePreview() {
+      document.getElementById('previewModal').style.display = 'none';
+    }
+  </script>
   <script src="main.js"></script>
 </body>
 </html>
