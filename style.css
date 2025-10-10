@@ -132,3 +132,19 @@ footer {
     font-size: 2rem;
   }
 }
+
+nav {
+  margin-top: 10px;
+}
+
+nav a {
+  color: var(--neon-gold);
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: var(--neon-cyan);
+}
