@@ -1,12 +1,9 @@
 // main.js - MOVILA
-// REPLACE these keys with your keys (do not commit private keys publicly if you want privacy)
 const TMDB_KEY = "e2e0e3b90f9709c4bc6201c266a5dfb6"; // <- put your TMDB v3 key
-const GNEWS_KEY = "dda11cfe0272244c8174dc3aa998156a"; // <- put your GNews key
 
 const TMDB_URL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${TMDB_KEY}&language=en-US`;
-const GNEWS_URL = `https://gnews.io/api/v4/top-headlines?category=entertainment&lang=en&country=us&max=6&apikey=${GNEWS_KEY}`;
 
-// Helpers: safe fetch with timeout
+// Helper: safe fetch with timeout
 async function safeFetch(url, timeout = 8000) {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
@@ -52,24 +49,38 @@ function renderCard(m){
   `;
 }
 
-/* ---------- VIRAL ---------- */
+/* ---------- VIRAL (Reddit NSFW videos) ---------- */
 async function loadViral(containerId = "viralContainer") {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = `<div class="skeleton" style="height:160px;margin-bottom:12px"></div>`.repeat(3);
-  const data = await safeFetch(GNEWS_URL);
-  if (!data || !data.articles) {
+
+  // Fetch top posts from NSFW subreddit (Reddit public API)
+  const REDDIT_URL = "https://www.reddit.com/r/NSFW_videos/top.json?limit=6&t=week";
+  const data = await safeFetch(REDDIT_URL);
+
+  if (!data || !data.data || !data.data.children) {
     container.innerHTML = getDummyViral().slice(0,4).map(v => renderVideo(v)).join("");
     return;
   }
-  container.innerHTML = data.articles.slice(0,6).map(article => {
-    return renderVideo({
-      title: article.title,
-      url: article.url,
-      img: article.image || "assets/preview.jpg",
-      source: article.source ? article.source.name : ""
-    });
-  }).join("");
+
+  // Filter only posts that are video & NSFW
+  const videos = data.data.children
+    .filter(post => post.data.over_18 && post.data.is_video && post.data.media && post.data.media.reddit_video)
+    .map(post => ({
+      title: post.data.title,
+      url: `https://reddit.com${post.data.permalink}`,
+      img: post.data.thumbnail && post.data.thumbnail.startsWith('http') ? post.data.thumbnail : "assets/preview.jpg",
+      source: "Reddit",
+      videoUrl: post.data.media.reddit_video.fallback_url
+    }));
+
+  if (!videos.length) {
+    container.innerHTML = getDummyViral().slice(0,4).map(v => renderVideo(v)).join("");
+    return;
+  }
+
+  container.innerHTML = videos.map(v => renderVideo(v)).join("");
 }
 
 function renderVideo(v){
@@ -79,7 +90,9 @@ function renderVideo(v){
       <div class="meta">
         <h4>${escapeHtml(v.title)}</h4>
         <p style="color:var(--muted);font-size:0.85rem;margin-top:6px">${escapeHtml(v.source || "")}</p>
-        <div style="margin-top:8px"><a href="${v.url || '#'}" target="_blank" style="color:var(--accent);text-decoration:none">Open →</a></div>
+        <div style="margin-top:8px">
+          <a href="${v.videoUrl || v.url || '#'}" target="_blank" style="color:var(--accent);text-decoration:none">Open →</a>
+        </div>
       </div>
     </div>
   `;
