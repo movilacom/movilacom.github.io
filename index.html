@@ -3,50 +3,27 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<!-- SEO Meta -->
-<meta name="description" content="Discover trending movies and viral videos on MOVILA — your daily portal for entertainment and pop culture updates.">
-<meta name="keywords" content="MOVILA, trending movies, viral videos, entertainment news, pop culture, trailers, US trends">
-<meta name="author" content="MOVILA Team">
-
-<!-- Open Graph -->
-<meta property="og:title" content="MOVILA — Trending Films & Viral Videos">
-<meta property="og:description" content="Discover trending movies and viral videos updated daily.">
-<meta property="og:image" content="https://movilacom.pages.dev/assets/preview.jpg">
-<meta property="og:url" content="https://movilacom.pages.dev/">
-<meta property="og:type" content="website">
-
-<!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="MOVILA — Trending Films & Viral Videos">
-<meta name="twitter:description" content="Explore daily trending films and viral videos at MOVILA.">
-<meta name="twitter:image" content="https://movilacom.pages.dev/assets/preview.jpg">
-
-<!-- Schema Markup -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "MOVILA",
-  "url": "https://movilacom.pages.dev/",
-  "description": "Discover trending movies and viral videos updated daily.",
-  "publisher": {
-    "@type": "Organization",
-    "name": "MOVILA",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://movilacom.pages.dev/assets/logo.svg"
-    }
-  }
-}
-</script>
-
   <title>MOVILA — Trending Films & Viral Videos</title>
+  <meta name="description" content="Discover the latest trending films and viral videos with MOVILA — your daily dose of entertainment and cinema vibes." />
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+
+  <!-- Open Graph Meta -->
+  <meta property="og:title" content="MOVILA — Trending Films & Viral Videos" />
+  <meta property="og:description" content="Stay updated with trending movies and viral videos around the world." />
+  <meta property="og:image" content="assets/preview.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://movilacom.pages.dev/" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="MOVILA — Trending Films & Viral Videos" />
+  <meta name="twitter:description" content="Discover trending films and viral videos with MOVILA — updated daily!" />
+  <meta name="twitter:image" content="assets/preview.jpg" />
 </head>
 
 <body>
+  <!-- Header -->
   <header class="navbar">
     <div class="logo">
       <img src="assets/logo.svg" alt="MOVILA Logo" height="48" />
@@ -54,47 +31,42 @@
     </div>
     <p class="tagline">Discover Trending Films & Viral Videos</p>
     <nav>
-    <a href="index.html">Home</a>
-    <a href="movies.html">Trending Films</a>
-    <a href="viral.html">Viral Videos</a>
-  </nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="movies.html">Trending Films</a>
+      <a href="viral.html">Viral Videos</a>
+      <a href="about.html">About</a>
+    </nav>
   </header>
 
+  <!-- Main Content -->
   <main>
     <!-- Trending Movies -->
     <section class="trending">
       <h2>🎬 Trending Movies</h2>
-      <div class="card-container">
-        <div class="card">
-          <img src="https://image.tmdb.org/t/p/w500/8bcoRX3hQRHufLPSDREdvr3YMXx.jpg" alt="Dune: Part Two Poster">
-          <h3>Dune: Part Two</h3>
-          <p>Paul Atreides unites with the Fremen to avenge his family and save Arrakis.</p>
-        </div>
-        <div class="card">
-          <img src="https://image.tmdb.org/t/p/w500/6tPqXlW8R7iVQm6r6tKp4sF1HZz.jpg" alt="Joker: Folie à Deux">
-          <h3>Joker: Folie à Deux</h3>
-          <p>Arthur Fleck returns with Harley Quinn in a twisted musical of chaos and love.</p>
-        </div>
-        <div class="card">
-          <img src="https://image.tmdb.org/t/p/w500/f3hEMr4P1q3gVJX2n5WvUj6zV8l.jpg" alt="Deadpool & Wolverine">
-          <h3>Deadpool & Wolverine</h3>
-          <p>The chaotic duo team up for an unexpected adventure across the multiverse.</p>
-        </div>
+      <div class="card-container" id="movies-container">
+        <!-- Movies will be dynamically loaded from TMDB API -->
+        <p class="loading">Loading trending movies...</p>
       </div>
+      <a class="more-btn" href="movies.html">See All Movies →</a>
     </section>
 
     <!-- Viral Videos -->
     <section class="viral">
       <h2>📺 Viral Videos</h2>
-      <div class="video-container">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/Tp_YZNqNBhw" title="Viral Clip" frameborder="0" allowfullscreen></iframe>
+      <div class="video-container" id="viral-container">
+        <!-- Viral videos will be loaded from GNews API -->
+        <p class="loading">Fetching viral videos...</p>
       </div>
-      <p class="note">*Videos sourced from trending clips on YouTube US*</p>
+      <a class="more-btn" href="viral.html">See More Videos →</a>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
     <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
   </footer>
+
+  <!-- JavaScript -->
+  <script src="main.js"></script>
 </body>
 </html>
