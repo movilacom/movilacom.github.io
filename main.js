@@ -47,42 +47,37 @@ function renderCard(m){
   `;
 }
 
-// ---------- VIRAL (Reddit NSFW videos) ----------
+// ---------- VIRAL (Reddit NSFW videos, fallback dummy) ----------
 async function loadViral(containerId = "viralContainer") {
   const container = document.getElementById(containerId);
   if (!container) return;
   container.innerHTML = `<div class="skeleton" style="height:160px;margin-bottom:12px"></div>`.repeat(3);
 
-  // Fetch top posts from NSFW subreddit (Reddit public API)
+  // Reddit API fetch
   const REDDIT_URL = "https://www.reddit.com/r/NSFW_videos/top.json?limit=6&t=week";
   const data = await safeFetch(REDDIT_URL);
 
-  if (!data || !data.data || !data.data.children) {
-    container.innerHTML = getDummyViral().slice(0,4).map(v => renderVideo(v)).join("");
-    return;
+  let videos = [];
+  if (data && data.data && data.data.children) {
+    videos = data.data.children
+      .filter(post => post.data.over_18 && post.data.is_video && post.data.media && post.data.media.reddit_video)
+      .map(post => ({
+        title: post.data.title,
+        videoUrl: post.data.media.reddit_video.fallback_url,
+        img: (post.data.thumbnail && post.data.thumbnail.startsWith('http')) ? post.data.thumbnail : "assets/preview.jpg",
+        source: "Reddit",
+        url: `https://reddit.com${post.data.permalink}`
+      }));
   }
 
-  // Filter only posts that are video & NSFW
-  const videos = data.data.children
-    .filter(post => post.data.over_18 && post.data.is_video && post.data.media && post.data.media.reddit_video)
-    .map(post => ({
-      title: post.data.title,
-      url: `https://reddit.com${post.data.permalink}`,
-      img: post.data.thumbnail && post.data.thumbnail.startsWith('http') ? post.data.thumbnail : "assets/preview.jpg",
-      source: "Reddit",
-      videoUrl: post.data.media.reddit_video.fallback_url
-    }));
-
   if (!videos.length) {
-    container.innerHTML = getDummyViral().slice(0,4).map(v => renderVideo(v)).join("");
-    return;
+    videos = getDummyViral().slice(0,4);
   }
 
   container.innerHTML = videos.map(v => renderVideo(v)).join("");
 }
 
 function renderVideo(v){
-  // Jika ada videoUrl dari Reddit, embed video
   let previewHtml = v.videoUrl
     ? `<video src="${v.videoUrl}" controls autoplay style="width:100%;max-height:50vh;border-radius:12px"></video>`
     : `<img src="${v.img}" style="width:100%;border-radius:12px;">`;
