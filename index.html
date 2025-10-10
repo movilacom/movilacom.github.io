@@ -1,72 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MOVILA — Trending Films & Viral Videos</title>
-  <meta name="description" content="Discover the latest trending films and viral videos with MOVILA — your daily dose of entertainment and cinema vibes." />
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
-
-  <!-- Open Graph Meta -->
-  <meta property="og:title" content="MOVILA — Trending Films & Viral Videos" />
-  <meta property="og:description" content="Stay updated with trending movies and viral videos around the world." />
-  <meta property="og:image" content="assets/preview.jpg" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://movilacom.pages.dev/" />
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MOVILA — Trending Films & Viral Videos" />
-  <meta name="twitter:description" content="Discover trending films and viral videos with MOVILA — updated daily!" />
-  <meta name="twitter:image" content="assets/preview.jpg" />
+  <meta name="description" content="Explore the latest trending movies and viral videos on MOVILA. Stay updated with entertainment trends worldwide.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <meta property="og:title" content="MOVILA — Trending Films & Viral Videos">
+  <meta property="og:description" content="Your daily source for trending films and viral videos.">
+  <meta property="og:image" content="assets/preview.jpg">
 </head>
-
 <body>
-  <!-- Header -->
   <header class="navbar">
     <div class="logo">
-      <img src="assets/logo.svg" alt="MOVILA Logo" height="48" />
+      <img src="assets/logo.svg" alt="MOVILA Logo" height="48">
       <h1>MOVILA</h1>
     </div>
-    <p class="tagline">Discover Trending Films & Viral Videos</p>
     <nav>
       <a href="index.html" class="active">Home</a>
-      <a href="movies.html">Trending Films</a>
-      <a href="viral.html">Viral Videos</a>
+      <a href="movies.html">Movies</a>
+      <a href="viral.html">Viral</a>
       <a href="about.html">About</a>
     </nav>
   </header>
 
-  <!-- Main Content -->
   <main>
-    <!-- Trending Movies -->
-    <section class="trending">
+    <section>
       <h2>🎬 Trending Movies</h2>
-      <div class="card-container" id="movies-container">
-        <!-- Movies will be dynamically loaded from TMDB API -->
-        <p class="loading">Loading trending movies...</p>
-      </div>
-      <a class="more-btn" href="movies.html">See All Movies →</a>
+      <div id="movies-container" class="card-container">Loading movies...</div>
     </section>
 
-    <!-- Viral Videos -->
-    <section class="viral">
+    <section>
       <h2>📺 Viral Videos</h2>
-      <div class="video-container" id="viral-container">
-        <!-- Viral videos will be loaded from GNews API -->
-        <p class="loading">Fetching viral videos...</p>
-      </div>
-      <a class="more-btn" href="viral.html">See More Videos →</a>
+      <div id="viral-container" class="video-container">Loading videos...</div>
     </section>
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
-  </footer>
-
-  <!-- JavaScript -->
+  <footer>© 2025 MOVILA — Your daily dose of movies & viral videos</footer>
   <script src="main.js"></script>
 </body>
 </html>
