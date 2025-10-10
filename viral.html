@@ -3,15 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Viral Videos — MOVILA</title>
+
+<!-- SEO Meta -->
+<meta name="description" content="Watch the most viral videos and entertainment news on MOVILA — updated using GNews API.">
+<meta name="keywords" content="viral videos, trending news, entertainment, MOVILA, US trends, YouTube viral, pop culture">
+<meta name="author" content="MOVILA Team">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Viral Videos — MOVILA">
+<meta property="og:description" content="The hottest viral clips and entertainment buzz from across the US.">
+<meta property="og:image" content="https://movilacom.pages.dev/assets/viral-preview.jpg">
+<meta property="og:url" content="https://movilacom.pages.dev/viral.html">
+<meta property="og:type" content="article">
+
+<!-- Schema Markup -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Viral Videos",
+  "description": "A curated list of trending viral videos and entertainment topics from GNews API.",
+  "url": "https://movilacom.pages.dev/viral.html"
+}
+</script>
+
+  <title>MOVILA — Viral Videos</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
+  <style>
+    .skeleton {
+      background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 10px;
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+  </style>
 </head>
+
 <body>
   <header class="navbar">
     <div class="logo">
-      <img src="assets/movila-logo.svg" alt="MOVILA Logo" height="48" />
+      <img src="assets/logo.svg" alt="MOVILA Logo" height="48" />
       <h1>MOVILA</h1>
     </div>
+    <p class="tagline">Discover Trending Films & Viral Videos</p>
     <nav>
       <a href="index.html">Home</a>
       <a href="movies.html">Trending Films</a>
@@ -21,18 +60,61 @@
 
   <main>
     <section class="viral">
-      <h2>📺 Viral Now</h2>
-      <div class="video-container">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/rUWxSEwctFU" title="Viral Clip" frameborder="0" allowfullscreen></iframe>
-      </div>
-      <div class="video-container">
-        <iframe width="100%" height="315" src="https://www.youtube.com/embed/tgbNymZ7vqY" title="Viral Clip" frameborder="0" allowfullscreen></iframe>
-      </div>
+      <h2>📺 Viral Videos</h2>
+      <div id="viral-container" class="card-container"></div>
+      <p class="note">*Data sourced from GNews trending topics*</p>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 MOVILA — Viral Entertainment Hub</p>
+    <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
   </footer>
+
+  <script>
+    const GNEWS_API = "dda11cfe0272244c8174dc3aa998156a";
+    const GNEWS_URL = `https://gnews.io/api/v4/top-headlines?topic=entertainment&lang=en&country=us&token=${GNEWS_API}`;
+
+    const container = document.getElementById("viral-container");
+
+    function showSkeleton(count = 6) {
+      container.innerHTML = "";
+      for (let i = 0; i < count; i++) {
+        const skeleton = document.createElement("div");
+        skeleton.className = "card";
+        skeleton.innerHTML = `
+          <div class="skeleton" style="width:100%;height:200px;"></div>
+          <div class="skeleton" style="width:80%;height:20px;margin:10px auto;"></div>
+          <div class="skeleton" style="width:50%;height:14px;margin:5px auto;"></div>
+        `;
+        container.appendChild(skeleton);
+      }
+    }
+
+    async function loadViral() {
+      showSkeleton();
+      try {
+        const res = await fetch(GNEWS_URL);
+        const data = await res.json();
+        container.innerHTML = "";
+
+        data.articles.slice(0, 9).forEach(item => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+            <img src="${item.image || 'https://via.placeholder.com/300x200'}" alt="${item.title}" />
+            <h3>${item.title}</h3>
+            <p>${item.source.name}</p>
+            <a href="${item.url}" target="_blank">Watch/Read 🔗</a>
+          `;
+          container.appendChild(card);
+        });
+      } catch (err) {
+        container.innerHTML = `<p style="color:red;">Failed to load viral videos 😭</p>`;
+        console.error("Error fetching viral:", err);
+      }
+    }
+
+    loadViral();
+  </script>
 </body>
 </html>
