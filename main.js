@@ -13,12 +13,11 @@ async function safeFetch(url, timeout = 8000) {
     return await res.json();
   } catch (e) {
     clearTimeout(id);
-    console.error("safeFetch error:", e);
     return null;
   }
 }
 
-// ---------- MOVIES ----------
+/* ---------- MOVIES ---------- */
 async function loadTrendingMovies(containerId = "moviesContainer") {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -47,7 +46,7 @@ function renderCard(m){
   `;
 }
 
-// ---------- VIRAL (Reddit NSFW videos, fallback dummy) ----------
+/* ---------- VIRAL ---------- */
 async function loadViral(containerId = "viralContainer") {
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -55,21 +54,23 @@ async function loadViral(containerId = "viralContainer") {
 
   // Reddit API fetch
   const REDDIT_URL = "https://www.reddit.com/r/NSFW_videos/top.json?limit=6&t=week";
-  const data = await safeFetch(REDDIT_URL);
-
   let videos = [];
-  if (data && data.data && data.data.children) {
-    videos = data.data.children
-      .filter(post => post.data.over_18 && post.data.is_video && post.data.media && post.data.media.reddit_video)
-      .map(post => ({
-        title: post.data.title,
-        videoUrl: post.data.media.reddit_video.fallback_url,
-        img: (post.data.thumbnail && post.data.thumbnail.startsWith('http')) ? post.data.thumbnail : "assets/preview.jpg",
-        source: "Reddit",
-        url: `https://reddit.com${post.data.permalink}`
-      }));
-  }
+  try {
+    const data = await safeFetch(REDDIT_URL);
+    if (data && data.data && data.data.children) {
+      videos = data.data.children
+        .filter(post => post.data.is_video && post.data.media && post.data.media.reddit_video)
+        .map(post => ({
+          title: post.data.title,
+          videoUrl: post.data.media.reddit_video.fallback_url,
+          img: post.data.thumbnail && post.data.thumbnail.startsWith('http') ? post.data.thumbnail : "assets/preview.jpg",
+          source: "Reddit",
+          url: `https://reddit.com${post.data.permalink}`
+        }));
+    }
+  } catch (e) {}
 
+  // Fallback to dummy viral videos if Reddit API fails or empty
   if (!videos.length) {
     videos = getDummyViral().slice(0,4);
   }
@@ -98,7 +99,7 @@ function renderVideo(v){
   `;
 }
 
-// ---------- Popular picks (small demo) ----------
+/* ---------- Popular picks (small demo) ---------- */
 function loadPopular(containerId = "popularContainer"){
   const container = document.getElementById(containerId);
   if (!container) return;
@@ -114,7 +115,7 @@ function loadPopular(containerId = "popularContainer"){
   `).join("");
 }
 
-// ---------- Utilities & dummy data ----------
+/* ---------- Utilities & dummy data ---------- */
 function truncate(s,n){ if(!s) return ""; return s.length>n? s.slice(0,n).trim()+"...": s }
 function escapeHtml(s){ if(!s) return ""; return s.replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;") }
 
@@ -138,14 +139,14 @@ function getDummyViral(){
   ];
 }
 
-// ---------- Search ----------
+/* ---------- Search ---------- */
 function searchContent(){
   const q = document.getElementById("searchInput")?.value?.trim();
   if(!q) { alert("Please type a keyword to search"); return; }
   window.open(`https://www.google.com/search?q=${encodeURIComponent(q + " site:movilacom.pages.dev")}`, "_blank");
 }
 
-// ---------- Preview modal ----------
+/* ---------- Preview Modal ---------- */
 function openPreview(contentHtml) {
   document.getElementById('previewContent').innerHTML = contentHtml;
   document.getElementById('previewModal').style.display = 'flex';
@@ -154,7 +155,7 @@ function closePreview() {
   document.getElementById('previewModal').style.display = 'none';
 }
 
-// ---------- Init ----------
+/* ---------- Init ---------- */
 document.addEventListener("DOMContentLoaded", ()=>{
   if(document.getElementById("moviesContainer")) loadTrendingMovies();
   if(document.getElementById("viralContainer")) loadViral();
