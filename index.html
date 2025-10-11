@@ -1,85 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>MOVILA — Trending Movies & Viral Videos USA</title>
-  <meta name="description" content="Discover the hottest trending movies and viral videos in the USA with MOVILA. Enjoy daily updates and cinematic previews in an elegant dark-gold theme." />
-  <meta name="keywords" content="trending movies, viral videos, USA, MOVILA, film, entertainment" />
-  <meta property="og:title" content="MOVILA — Trending Movies & Viral Videos USA" />
-  <meta property="og:description" content="MOVILA brings you the hottest films and viral videos in the USA. Explore, preview, and enjoy the best entertainment daily." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MOVILA — Discover trending films and viral videos in one place. Stay updated with the hottest movies and internet sensations." />
+  <meta name="keywords" content="movies, viral videos, trending films, reviews, trailers, MOVILA" />
+  <meta property="og:title" content="MOVILA — Trending Films & Viral Videos" />
+  <meta property="og:description" content="Discover trending films and viral videos in one elegant platform." />
   <meta property="og:image" content="assets/preview.jpg" />
   <meta property="og:url" content="https://movilacom.github.io/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="canonical" href="https://movilacom.github.io/" />
+  <title>MOVILA — Trending Films & Viral Videos</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <script defer src="main.js"></script>
 </head>
+
 <body>
-  <div class="header-wrap">
-    <div class="header">
-      <div class="left">
-        <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <nav class="nav-strip" id="navStrip">
-          <a href="movies.html">Trending Films</a>
-          <a href="viral.html">Viral Videos</a>
-          <a href="about.html">About</a>
-        </nav>
-      </div>
-      <div class="center brand">
-        <img src="assets/logo.svg" alt="MOVILA logo" />
-        <h1>MOVILA</h1>
-      </div>
-      <div class="right search-bar">
-        <input id="searchInput" type="search" placeholder="Search movies or videos..." />
-        <button onclick="searchContent()">Search</button>
-      </div>
+  <header class="header">
+    <div class="nav-left">
+      <button class="hamburger" id="menuToggle">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navMenu">
+        <a href="index.html">Home</a>
+        <a href="movies.html">Trending Films</a>
+        <a href="viral.html">Viral Videos</a>
+        <a href="about.html">About</a>
+      </nav>
     </div>
-    <p class="tagline">Discover Trending Movies & Viral Videos from the USA — Updated Daily</p>
-  </div>
-  <main class="content-grid">
-    <aside class="sidebar">
-      <h3>🔥 Viral Videos</h3>
-      <div id="viralContainer" class="mini-list"></div>
-    </aside>
-    <section class="main-highlight">
-      <h2>🎬 Trending Movies</h2>
-      <div id="moviesContainer" class="grid-cards"></div>
+
+    <div class="logo-center">
+      <img src="assets/logo.svg" alt="MOVILA Logo" class="logo" />
+    </div>
+
+    <div class="nav-right">
+      <form id="searchForm">
+        <input type="text" placeholder="Search..." />
+        <button type="submit">🔍</button>
+      </form>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Discover Trending Films & Viral Videos</h1>
+      <p>Explore the latest movies and viral sensations making waves worldwide.</p>
     </section>
-    <aside class="sidebar">
-      <h3>⭐ Popular Picks</h3>
-      <div id="popularContainer"></div>
-    </aside>
+
+    <section class="grid-section">
+      <h2>🔥 Trending Movies</h2>
+      <div class="grid" id="movieGrid">
+        <!-- JS injects movie cards here -->
+      </div>
+    </section>
+
+    <section class="grid-section">
+      <h2>📈 Viral Videos</h2>
+      <div class="grid" id="videoGrid">
+        <!-- JS injects video cards here -->
+      </div>
+    </section>
   </main>
+
   <footer>
-    <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a> | 
-      <a href="terms.html">Terms of Service</a>
-    </div>
-    © 2025 MOVILA — by Besti 💛 | All Rights Reserved
+    <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
   </footer>
-  <!-- Modal Preview -->
-  <div id="previewModal" class="preview-modal" style="display:none;">
-    <div class="preview-content" id="previewContent"></div>
-    <button class="close-modal" onclick="closePreview()">✕</button>
-  </div>
-  <script>
-    function toggleMenu() {
-      document.getElementById('navStrip').classList.toggle('active');
-    }
-    document.addEventListener('click', function(e) {
-      var nav = document.getElementById('navStrip');
-      var hamburger = document.querySelector('.hamburger');
-      if (nav.classList.contains('active') && !nav.contains(e.target) && !hamburger.contains(e.target)) {
-        nav.classList.remove('active');
-      }
-    });
-    function closePreview() {
-      document.getElementById('previewModal').style.display = 'none';
-    }
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "name": "MOVILA",
+    "url": "https://movilacom.github.io/",
+    "description": "Discover trending films and viral videos.",
+    "publisher": { "@type": "Organization", "name": "MOVILA" }
+  }
   </script>
-  <script src="main.js"></script>
 </body>
 </html>
