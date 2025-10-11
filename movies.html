@@ -1,73 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Trending Movies USA | MOVILA</title>
-  <meta name="description" content="Explore the latest trending movies in the USA. MOVILA delivers daily updates and cinematic previews for movie lovers." />
-  <meta name="keywords" content="trending movies, USA, MOVILA, film, cinema, preview" />
-  <meta property="og:title" content="Trending Movies USA | MOVILA" />
-  <meta property="og:description" content="Explore the latest trending movies in the USA. MOVILA delivers daily updates and cinematic previews for movie lovers." />
-  <meta property="og:image" content="assets/preview.jpg" />
-  <meta property="og:url" content="https://movilacom.github.io/movies.html" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Explore trending films, reviews, and latest blockbusters on MOVILA — your daily movie hub." />
+  <meta name="keywords" content="movies, reviews, trending films, Hollywood, trailers, MOVILA" />
+  <meta name="author" content="MOVILA Team" />
+  <title>Trending Films & Reviews — MOVILA</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+  <link rel="icon" type="image/svg+xml" href="assets/icon.svg" />
 </head>
+
 <body>
-  <div class="header-wrap">
-    <div class="header">
-      <div class="left">
-        <button class="hamburger" aria-label="Menu" onclick="toggleMenu()">
-          <span></span><span></span><span></span>
-        </button>
-        <nav class="nav-strip" id="navStrip">
-          <a href="index.html">Home</a>
-          <a href="movies.html" class="active">Trending Films</a>
-          <a href="viral.html">Viral Videos</a>
-          <a href="about.html">About</a>
-        </nav>
-      </div>
-      <div class="center brand">
-        <img src="assets/logo.svg" alt="MOVILA logo" />
-        <h1>MOVILA</h1>
-      </div>
-      <div class="right search-bar">
-        <input id="searchInput" type="search" placeholder="Search movies..." />
-        <button onclick="searchContent()">Search</button>
-      </div>
+  <header class="navbar">
+    <div class="nav-left">
+      <button id="menuToggle" class="menu-btn">☰</button>
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="movies.html" class="active">Trending Films</a>
+        <a href="viral.html">Viral Videos</a>
+        <a href="about.html">About</a>
+      </nav>
     </div>
-    <p class="tagline">Discover Trending Movies & Viral Videos from the USA — Updated Daily</p>
-  </div>
-  <main class="single-main">
-    <h2>🎬 Trending Movies This Week</h2>
-    <div id="moviesContainer" class="grid-cards"></div>
+
+    <div class="logo">
+      <img src="assets/logo.svg" alt="MOVILA Logo" height="48" />
+    </div>
+
+    <div class="nav-right">
+      <input type="text" id="searchInput" placeholder="Search movies..." />
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>🎬 Trending & Reviewed Films</h1>
+      <p>Discover detailed reviews of the week’s most popular movies.</p>
+    </section>
+
+    <section class="grid-section">
+      <div class="grid">
+        <div class="card fade-in">
+          <img src="https://image.tmdb.org/t/p/w500/8bcoRX3hQRHufLPSDREdvr3YMXx.jpg" alt="Dune: Part Two Poster">
+          <h3>Dune: Part Two</h3>
+          <p>Paul Atreides unites with the Fremen to fight destiny and save Arrakis.</p>
+          <span class="rating">⭐ 8.1/10</span>
+        </div>
+        <div class="card fade-in">
+          <img src="https://image.tmdb.org/t/p/w500/6tPqXlW8R7iVQm6r6tKp4sF1HZz.jpg" alt="Joker 2">
+          <h3>Joker: Folie à Deux</h3>
+          <p>Arthur Fleck and Harley Quinn return in a dark musical of chaos and love.</p>
+          <span class="rating">⭐ 8.7/10</span>
+        </div>
+        <div class="card fade-in">
+          <img src="https://image.tmdb.org/t/p/w500/f3hEMr4P1q3gVJX2n5WvUj6zV8l.jpg" alt="Deadpool & Wolverine">
+          <h3>Deadpool & Wolverine</h3>
+          <p>Marvel’s chaotic duo travel through timelines in a wild, hilarious mission.</p>
+          <span class="rating">⭐ 8.4/10</span>
+        </div>
+      </div>
+    </section>
   </main>
+
   <footer>
-  <div class="footer-links">
-    <a href="privacy.html">Privacy Policy</a> | 
-    <a href="terms.html">Terms of Service</a>
-  </div>
-  © 2025 MOVILA — by Besti 💛 | All Rights Reserved
-</footer>
-  <div id="previewModal" class="preview-modal" style="display:none;">
-    <div class="preview-content" id="previewContent"></div>
-    <button class="close-modal" onclick="closePreview()">✕</button>
-  </div>
-  <script>
-    function toggleMenu() {
-      document.getElementById('navStrip').classList.toggle('active');
-    }
-    document.addEventListener('click', function(e) {
-      var nav = document.getElementById('navStrip');
-      var hamburger = document.querySelector('.hamburger');
-      if (nav.classList.contains('active') && !nav.contains(e.target) && !hamburger.contains(e.target)) {
-        nav.classList.remove('active');
-      }
-    });
-    function closePreview() {
-      document.getElementById('previewModal').style.display = 'none';
-    }
-  </script>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="about.html">About MOVILA</a>
+    </div>
+    <p>© 2025 MOVILA — Discover Trending Films & Viral Videos 💛</p>
+  </footer>
+
   <script src="main.js"></script>
 </body>
 </html>
