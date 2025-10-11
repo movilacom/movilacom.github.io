@@ -3,79 +3,116 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MOVILA — Discover trending films and viral videos in one place. Stay updated with the hottest movies and internet sensations." />
-  <meta name="keywords" content="movies, viral videos, trending films, reviews, trailers, MOVILA" />
-  <meta property="og:title" content="MOVILA — Trending Films & Viral Videos" />
-  <meta property="og:description" content="Discover trending films and viral videos in one elegant platform." />
+  <meta name="description" content="MOVILA - Discover trending movies and viral videos in an elegant cinematic hub." />
+  <meta name="keywords" content="movies, viral videos, trailers, trending, MOVILA" />
+  <meta name="author" content="MOVILA Team" />
+  <title>MOVILA - Trending Movies & Viral Videos</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="MOVILA - Trending Movies & Viral Videos" />
+  <meta property="og:description" content="Your daily dose of cinema and viral entertainment." />
   <meta property="og:image" content="assets/preview.jpg" />
   <meta property="og:url" content="https://movilacom.github.io/" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <link rel="canonical" href="https://movilacom.github.io/" />
-  <title>MOVILA — Trending Films & Viral Videos</title>
+  <meta name="theme-color" content="#c6a664" />
+
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="style.css" />
-  <script defer src="main.js"></script>
 </head>
-
 <body>
+
+  <!-- HEADER -->
   <header class="header">
-    <div class="nav-left">
-      <button class="hamburger" id="menuToggle">
-        <span></span><span></span><span></span>
-      </button>
-      <nav class="nav-links" id="navMenu">
-        <a href="index.html">Home</a>
-        <a href="movies.html">Trending Films</a>
-        <a href="viral.html">Viral Videos</a>
-        <a href="about.html">About</a>
-      </nav>
-    </div>
-
-    <div class="logo-center">
-      <img src="assets/logo.svg" alt="MOVILA Logo" class="logo" />
-    </div>
-
-    <div class="nav-right">
-      <form id="searchForm">
-        <input type="text" placeholder="Search..." />
-        <button type="submit">🔍</button>
-      </form>
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+    <img src="assets/logo.svg" alt="MOVILA Logo" class="logo" />
+    <div class="search-container">
+      <input type="text" placeholder="Search..." id="search" />
     </div>
   </header>
 
-  <main>
-    <section class="hero">
-      <h1>Discover Trending Films & Viral Videos</h1>
-      <p>Explore the latest movies and viral sensations making waves worldwide.</p>
+  <!-- NAV MENU -->
+  <nav class="nav" id="nav">
+    <a href="index.html">Home</a>
+    <a href="movies.html">Movies</a>
+    <a href="viral.html">Viral</a>
+    <a href="about.html">About</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="content">
+    <section class="section">
+      <h2>🎬 Trending Movies</h2>
+      <div id="movies-grid" class="grid"></div>
     </section>
 
-    <section class="grid-section">
-      <h2>🔥 Trending Movies</h2>
-      <div class="grid" id="movieGrid">
-        <!-- JS injects movie cards here -->
-      </div>
-    </section>
-
-    <section class="grid-section">
-      <h2>📈 Viral Videos</h2>
-      <div class="grid" id="videoGrid">
-        <!-- JS injects video cards here -->
-      </div>
+    <section class="section">
+      <h2>🔥 Viral Videos</h2>
+      <div id="viral-grid" class="grid"></div>
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 MOVILA — by Besti 💛 | All Rights Reserved</p>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2025 MOVILA. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy</a> |
+      <a href="terms.html">Terms</a>
+    </div>
   </footer>
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Website",
-    "name": "MOVILA",
-    "url": "https://movilacom.github.io/",
-    "description": "Discover trending films and viral videos.",
-    "publisher": { "@type": "Organization", "name": "MOVILA" }
-  }
+  <script>
+    // === NAV TOGGLE ===
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+
+    // === MOVIE REVIEW SECTION (TMDB API) ===
+    const movieGrid = document.getElementById('movies-grid');
+    const TMDB_API = "https://api.themoviedb.org/3/trending/movie/week?api_key=7d7a5a4d58c9d0c9090c7a1d7b431b6f";
+
+    async function fetchMovies() {
+      try {
+        const res = await fetch(TMDB_API);
+        const data = await res.json();
+        movieGrid.innerHTML = data.results.slice(0, 6).map(movie => `
+          <div class="card fade-in">
+            <img src="https://image.tmdb.org/t/p/w500${movie.poster_path}" alt="${movie.title}">
+            <h3>${movie.title}</h3>
+            <p>${movie.overview.substring(0, 100)}...</p>
+            <span>⭐ ${movie.vote_average.toFixed(1)}</span>
+          </div>
+        `).join('');
+      } catch (err) {
+        movieGrid.innerHTML = "<p>Failed to load movies.</p>";
+      }
+    }
+
+    // === VIRAL VIDEO SECTION (Reddit public feed) ===
+    const viralGrid = document.getElementById('viral-grid');
+    const redditAPI = "https://www.reddit.com/r/videos/hot.json?limit=6";
+
+    async function fetchViral() {
+      try {
+        const res = await fetch(redditAPI);
+        const data = await res.json();
+        const posts = data.data.children.filter(p => p.data.thumbnail && p.data.thumbnail !== "self");
+        viralGrid.innerHTML = posts.map(post => `
+          <div class="card fade-in">
+            <img src="${post.data.thumbnail}" alt="${post.data.title}">
+            <h3>${post.data.title}</h3>
+            <a href="https://reddit.com${post.data.permalink}" target="_blank">Watch</a>
+          </div>
+        `).join('');
+      } catch (err) {
+        viralGrid.innerHTML = "<p>Failed to load viral videos.</p>";
+      }
+    }
+
+    // === CALL FUNCTIONS ===
+    fetchMovies();
+    fetchViral();
   </script>
+
 </body>
 </html>
